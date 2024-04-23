@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { AppDataWindowT } from "./types";
 import { Box, Stack } from "@mui/material";
 
 function AppDataWindow({ apphost, version, os }: AppDataWindowT) {
-  useEffect(() => {
-    console.log(`${apphost}: ${version} ${os}`);
-  }, [apphost, version, os]);
-
   return (
     <Stack
       sx={{

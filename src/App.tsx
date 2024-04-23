@@ -2,11 +2,14 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Stack } from "@mui/material";
 
 import { InitialBtn, AppDataWindow } from "./components";
+import { checkForUpdates } from "./kit/version";
+import UpdateWarning from "./components/UpdateWarning";
 
 function App() {
   const [version, setVersion] = useState<string | null>(null);
   const [apphost, setApphost] = useState<string | null>(null);
   const [os, setOs] = useState<string | null>(null);
+  const [isOutdated, setIsOutdated] = useState<boolean>(false);
 
   const appData = useMemo(
     () => ({ apphost, version, os }),
@@ -21,6 +24,11 @@ function App() {
     setOs(searchParams.get("os"));
   }, []);
 
+  // check is the version for the current platform outdated
+  useEffect(() => {
+    setIsOutdated(() => checkForUpdates(os || "", version || ""));
+  }, [os, version]);
+
   return (
     <Stack
       sx={{
@@ -30,7 +38,11 @@ function App() {
         justifyContent: "center",
       }}
     >
-      <InitialBtn msg="Getting started" />
+      <Stack spacing={2}>
+        <InitialBtn msg="Getting started" />
+        {isOutdated && <UpdateWarning />}
+      </Stack>
+
       <AppDataWindow {...appData} />
     </Stack>
   );
