@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Stack } from "@mui/material";
 
+import { InitialBtn } from "./components";
+
 function App() {
+  useEffect(() => {
+    // get current url query parametres
+    const searchParams = new URLSearchParams(document.location.search);
+    console.log(`${searchParams.get("appversion")}`);
+  }, []);
+
   return (
     <Stack
       sx={{
@@ -11,7 +19,7 @@ function App() {
         justifyContent: "center",
       }}
     >
-      Hello, User!
+      <InitialBtn msg="Getting started" />
     </Stack>
   );
 }
