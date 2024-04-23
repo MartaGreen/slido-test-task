@@ -3,7 +3,7 @@ import { Alert } from "@mui/material";
 
 function UpdateWarning() {
   return (
-    <Alert variant="outlined" severity="warning">
+    <Alert data-testid="updateWarning" variant="outlined" severity="warning">
       Update required!
     </Alert>
   );
