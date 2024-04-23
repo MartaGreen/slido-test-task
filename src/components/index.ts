@@ -1,3 +1,4 @@
+import AppDataWindow from "./AppDataWindow";
 import InitialBtn from "./InitialBtn";
 
-export { InitialBtn };
+export { AppDataWindow, InitialBtn };

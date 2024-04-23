@@ -1,13 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Stack } from "@mui/material";
 
-import { InitialBtn } from "./components";
+import { InitialBtn, AppDataWindow } from "./components";
 
 function App() {
+  const [version, setVersion] = useState<string | null>(null);
+  const [apphost, setApphost] = useState<string | null>(null);
+  const [os, setOs] = useState<string | null>(null);
+
+  const appData = useMemo(
+    () => ({ apphost, version, os }),
+    [apphost, version, os]
+  );
+
+  // get current url query parametres after update
   useEffect(() => {
-    // get current url query parametres
     const searchParams = new URLSearchParams(document.location.search);
-    console.log(`${searchParams.get("appversion")}`);
+    setVersion(searchParams.get("appVersion"));
+    setApphost(searchParams.get("apphost"));
+    setOs(searchParams.get("os"));
   }, []);
 
   return (
@@ -20,6 +31,7 @@ function App() {
       }}
     >
       <InitialBtn msg="Getting started" />
+      <AppDataWindow {...appData} />
     </Stack>
   );
 }
