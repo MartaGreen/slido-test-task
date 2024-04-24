@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Stack } from "@mui/material";
 
-import { InitialBtn, AppDataWindow } from "./components";
-import { checkForUpdates } from "./kit/version";
-import UpdateWarning from "./components/UpdateWarning";
+import { InitialBtn, AppDataWindow, UpdateWarning } from "components";
+import { checkForUpdates } from "kit/version";
 
 function App() {
   const [version, setVersion] = useState<string | null>(null);
