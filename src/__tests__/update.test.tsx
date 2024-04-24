@@ -28,6 +28,12 @@ const testData = [
   { version: "0.5.8", os: "win", isOutdated: true },
   { version: "0.0.0", os: "win", isOutdated: true },
   { version: "1.0.0", os: "win", isOutdated: true },
+
+  // non-existing platform
+  { version: "1.5.0", os: "winr", isOutdated: false },
+  { version: "0.27.0", os: "macw", isOutdated: false },
+  { version: "1.5.123", os: "winmac", isOutdated: false },
+  { version: "1.5.123", os: "macwin", isOutdated: false },
 ];
 
 describe("App Component", () => {
