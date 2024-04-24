@@ -1,27 +1,24 @@
-type VersionT = { latest: string; expections: string[] };
+type VersionT = { latest: string; outdated: string[] };
 
-const latestVersions = {
+const actualVersionsInfo = {
   win: {
     latest: "1.5.0",
-    expections: [],
+    outdated: [],
   },
   mac: {
     latest: "0.28.0",
-    expections: ["1.5.100", "1.5.120", "1.5.123"],
+    outdated: ["1.5.100", "1.5.120", "1.5.123"],
   },
 };
-const getLastestVersions = (os: string): VersionT => {
-  if (os === "mac") return latestVersions["mac"];
-  if (os === "win") return latestVersions["win"];
+const getActualVersionInfo = (os: string): VersionT => {
+  if (os === "mac") return actualVersionsInfo["mac"];
+  if (os === "win") return actualVersionsInfo["win"];
   throw new Error("Unknown OS: " + os);
 };
 
 // compare current version (checkedVer) to the latest one (latestVer)
 const compareVersions = (checkedVer: string, latestVer: VersionT): boolean => {
-  if (
-    checkedVer < latestVer.latest ||
-    latestVer.expections.includes(checkedVer)
-  )
+  if (checkedVer < latestVer.latest || latestVer.outdated.includes(checkedVer))
     return true;
   return false;
 };
@@ -31,7 +28,7 @@ const compareVersions = (checkedVer: string, latestVer: VersionT): boolean => {
 // return false if version is up-to-date
 const checkForUpdates = (os: string, version: string): boolean => {
   try {
-    const latestVersion: VersionT = getLastestVersions(os);
+    const latestVersion: VersionT = getActualVersionInfo(os);
     return compareVersions(version, latestVersion);
   } catch (e: any) {
     console.log(e.message);

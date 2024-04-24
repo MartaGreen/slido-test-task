@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import App from "../App";
+import App from "App";
 
 // For os=win platform, any appversion older then 1.5.0 is outdated
 // For os=mac platform, any app version older then 0.28.0 && 1.5.100, 1.5.120, 1.5.123 are outdated
